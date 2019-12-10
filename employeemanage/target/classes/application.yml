@@ -1,0 +1,46 @@
+#server-congif
+server:
+  port: 8080
+  servlet:
+    context-path: /employee
+    
+#database and jpa/hibernate-config    
+spring:
+  mvc:
+    view:
+      prefix: /WEB-INF/view/
+      suffix: .jsp    
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3307/crudoperation?useSSL=false&zeroDateTimeBehavior=convertToNull&useUnicode=true&characterEncoding=UTF-8
+    username: root
+    password: root123  
+    hikari:
+      auto-commit: false #This property controls the default auto-commit behavior of connections returned from the pool.
+      connection-timeout: 36000 #This property controls the maximum number of milliseconds that a client (that's you) will wait for a connection from the pool.
+      idle-timeout: 600000 #This property controls the maximum amount of time that a connection is allowed to sit idle in the pool.
+      max-lifetime: 1800000 #This property controls the maximum lifetime of a connection in the pool.An in-use connection will never be retired, only when it is closed will it then be removed.
+      minimum-idle: 8 #This property controls the minimum number of idle connections that HikariCP tries to maintain in the pool.
+      maximum-pool-size: 64 #This property controls the maximum size that the pool is allowed to reach, including both idle and in-use connections.
+      poolName: riskcheck-connection-pool #Connection pool name
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL8Dialect #database-dialect to detect verion and type of database
+    open-in-view: false
+    hibernate:
+#      ddl-auto: update #This property automatically reflects changes made in POJO/entity/model to database table
+      naming:
+        implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    properties:
+      hibernate:
+        show_sql: true #set true to print database queries
+        format_sql: true #This property beautifies the queries printed by show_sql
+#    tomcat:
+#      default-auto-commit: true
+#      max-active: 50
+#      min-idle: 8
+#      max-wait: 2000
+#      maxAge: 1800000
+#      test-on-connect: true
+#      test-on-borrow: true
+#      test-on-return: true    
